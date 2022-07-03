@@ -57,14 +57,14 @@ module.exports = function toReadable(number) {
     let l = number.toString().length;
     switch (l) {
       case 1:
-        console.log(`${units(number)}`);
+        // console.log(`${units(number)}`);
         return `${units(number)}`;
       case 2:
-        console.log(`${tenths(number)}`);
+        // console.log(`${tenths(number)}`);
         return `${tenths(number)}`;
       case 3:
-        console.log(`${units(Number(number.toString()[0]))} hundred ${tenths(number - 100)}`);
-        return `${units(Number(number.toString()[0]))} hundred ${tenths(number - 100)}`;
+        // console.log(`${units(Number(number.toString()[0]))} hundred ${tenths(number - 100)}`);
+        return `${units(Number(number.toString()[0]))} hundred ${tenths(Number(number.toString().slice(1)))}`;
       default:
         break;
     }
