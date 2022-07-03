@@ -17,49 +17,57 @@ module.exports = function toReadable(number) {
       case 6:
         return 'six'
       case 7:
-        return 'sevrn'
+        return 'seven'
       case 8:
         return 'eight'
       case 9:
         return 'nine'
       default:
-        break;
+        return '';
     }
   }
 
   function tenths(number) {
-    switch (number) {
-      case 11:
-        return 'eleven'
-      case 12:
-        return 'twelve'
-      case 13:
-        return 'thirteen'
-      case 14:
-        return `${units(4)}teen`
-      case 15:
-      case 16:
-      case 17:
-      case 18:
-      case 19:
-      case 20:
-
-
-      default:
-        break;
+    const n = {
+      10: 'ten',
+      11: 'eleven',
+      12: 'twelve',
+      13: 'thirteen',
+      14: `${units(number - 10)}teen`,
+      15: 'fifteen',
+      16: `${units(number - 10)}teen`,
+      17: `${units(number - 10)}teen`,
+      18: 'eighteen',
+      19: `${units(number - 10)}teen`,
+      20: `twenty ${number - 20 ? units(number - 20) : ''}`,
+      30: `thirty ${number - 30 ? units(number - 30) : ''}`,
+      40: `forty ${number - 40 ? units(number - 40) : ''}`,
+      50: `fifty ${number - 50 ? units(number - 50) : ''}`,
+      60: `sixty ${number - 60 ? units(number - 60) : ''}`,
+      70: `seventy ${number - 70 ? units(number - 70) : ''}`,
+      80: `eighty ${number - 80 ? units(number - 80) : ''}`,
+      90: `ninety ${number - 90 ? units(number - 90) : ''}`,
     }
+
+    return n[(89 < number) ? 90 : (79 < number) ? 80 : (69 < number) ? 70 : (59 < number) ? 60 : (49 < number) ? 50 : (39 < number) ? 40 : (29 < number) ? 30 : (19 < number) ? 20 : number];
   }
+
 
   function str(number) {
-    let l = number.length;
+    let l = number.toString().length;
     switch (l) {
-      case l == 1:
+      case 1:
+        console.log(`${units(number)}`);
         return `${units(number)}`;
-      case l == 2:
+      case 2:
+        console.log(`${tenths(number)}`);
         return `${tenths(number)}`;
-
+      case 3:
+        console.log(`${units(Number(number.toString()[0]))} hundred ${tenths(number - 100)}`);
+        return `${units(Number(number.toString()[0]))} hundred ${tenths(number - 100)}`;
       default:
         break;
     }
   }
+  return str(number);
 }
