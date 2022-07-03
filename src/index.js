@@ -28,6 +28,14 @@ module.exports = function toReadable(number) {
   }
 
   function tenths(number) {
+
+    let nStart = Number(number.toString().slice(0, 1));
+
+    function end(number) {
+      let nEnd = Number(number.toString().slice(1));
+      return nEnd ? ' ' + units(nEnd) : '';
+    }
+
     const n = {
       10: 'ten',
       11: 'eleven',
@@ -39,23 +47,25 @@ module.exports = function toReadable(number) {
       17: `${units(number - 10)}teen`,
       18: 'eighteen',
       19: `${units(number - 10)}teen`,
-      20: `twenty${number - 20 ? ' ' + units(number - 20) : ''}`,
-      30: `thirty${number - 30 ? ' ' + units(number - 30) : ''}`,
-      40: `forty${number - 40 ? ' ' + units(number - 40) : ''}`,
-      50: `fifty${number - 50 ? ' ' + units(number - 50) : ''}`,
-      60: `sixty${number - 60 ? ' ' + units(number - 60) : ''}`,
-      70: `seventy${number - 70 ? ' ' + units(number - 70) : ''}`,
-      80: `eighty${number - 80 ? ' ' + units(number - 80) : ''}`,
-      90: `ninety${number - 90 ? ' ' + units(number - 90) : ''}`,
+      20: `twenty${end(number)}`,
+      30: `thirty${end(number)}`,
+      40: `forty${end(number)}`,
+      50: `fifty${end(number)}`,
+      60: `sixty${end(number)}`,
+      70: `seventy${end(number)}`,
+      80: `eighty${end(number)}`,
+      90: `ninety${end(number)}`,
     }
 
-    return n[(89 < number) ? 90 : (79 < number) ? 80 : (69 < number) ? 70 : (59 < number) ? 60 : (49 < number) ? 50 : (39 < number) ? 40 : (29 < number) ? 30 : (19 < number) ? 20 : number];
+    return n[nStart > 1 ? Number(nStart.toString() + '0') : number];
   }
 
   function str(number) {
+
     let str = number.toString();
     let start = Number(str[0]);
     let end = Number(str.slice(1));
+
     switch (str.length) {
       case 1:
         return `${units(number)}`;
